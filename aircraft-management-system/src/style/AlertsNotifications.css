@@ -1,0 +1,208 @@
+import React from "react";
+import "../style/AlertsNotifications.css";
+
+const AlertsNotifications = () => {
+  return (
+    <div className="alerts-page">
+      {/* Sidebar */}
+      <aside className="sidebar">
+        <div className="logo-section">
+          <h1>Fleet Command</h1>
+          <p>V 4.2.1-Industrial</p>
+        </div>
+
+        <nav className="nav-links">
+          <a href="#">
+            <span className="material-symbols-outlined">dashboard</span>
+            Dashboard
+          </a>
+
+          <a href="#">
+            <span className="material-symbols-outlined">flight</span>
+            Aircraft
+          </a>
+
+          <a href="#">
+            <span className="material-symbols-outlined">assignment</span>
+            Tasks
+          </a>
+
+          <a href="#" className="active">
+            <span className="material-symbols-outlined">warning</span>
+            Alerts
+          </a>
+
+          <a href="#">
+            <span className="material-symbols-outlined">inventory_2</span>
+            Inventory
+          </a>
+
+          <a href="#">
+            <span className="material-symbols-outlined">analytics</span>
+            Reports
+          </a>
+        </nav>
+
+        <div className="profile-card">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsGXIfyDoS8hGjj645Wf9L42VQD4BeZDjnQ4WC9hr8YP8epVe9cQcr5k4ylQc90b2591eSP0ObHHp0tJ3BsaBVDCJuBJi1xGUaWmUd0QFYOQd3hr0NxBnWaVSyyl1he1vzdzcWYc4IqxGPO9XJdGJleCgDmTqU8fjIQYxzXcQODOxev5yF5UV-lPEaRk9Nyn2j1yTd74XAghANFfAWrVdSSh9l14K9VBkWjmKmnk9tzqYREQV2VnYrgB9tViW4YbmehwCfG-IAnIA"
+            alt="profile"
+          />
+
+          <div>
+            <h4>Marcus Vance</h4>
+            <p>Chief Engineer</p>
+          </div>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main className="main-content">
+        {/* Header */}
+        <header className="topbar">
+          <div className="search-box">
+            <span className="material-symbols-outlined">search</span>
+
+            <input
+              type="text"
+              placeholder="Search tail number, task, or alert ID..."
+            />
+          </div>
+
+          <div className="topbar-right">
+            <span className="material-symbols-outlined">notifications</span>
+
+            <div className="brand">
+              <h2>AeroOps Control</h2>
+              <p>System Alert Center</p>
+            </div>
+          </div>
+        </header>
+
+        {/* Alert Overview */}
+        <section className="overview-grid">
+          <div className="overview-card critical">
+            <p>CURRENT AIRCRAFT ON GROUND</p>
+            <h2>04</h2>
+            <span className="material-symbols-outlined big-icon">
+              flight_takeoff
+            </span>
+          </div>
+
+          <div className="overview-card overdue">
+            <p>OVERDUE INSPECTIONS</p>
+            <h2>12</h2>
+            <span className="material-symbols-outlined big-icon">
+              history
+            </span>
+          </div>
+
+          <div className="overview-card">
+            <p>NEW SAFETY BULLETINS</p>
+            <h2>07</h2>
+            <span className="material-symbols-outlined big-icon">
+              gavel
+            </span>
+          </div>
+        </section>
+
+        {/* Alert Feed */}
+        <section className="alert-feed">
+          <div className="feed-header">
+            <h3>Active Alert Feed</h3>
+
+            <div className="feed-buttons">
+              <button>ALL ALERTS</button>
+              <button className="active-btn">UNREAD (21)</button>
+            </div>
+          </div>
+
+          {/* Alert Card */}
+          <div className="alert-card critical-border">
+            <div className="alert-icon">
+              <span className="material-symbols-outlined">error</span>
+            </div>
+
+            <div className="alert-content">
+              <div className="alert-top">
+                <div>
+                  <span className="alert-id">AOG-772-HYD</span>
+                  <span className="badge critical-badge">CRITICAL</span>
+                </div>
+
+                <small>08:42 AM · 12 OCT 23</small>
+              </div>
+
+              <h4>
+                N772AF: Main Hydraulic System Pressure Failure
+              </h4>
+
+              <p>
+                Aircraft grounded at KDFW. Telemetry indicates
+                pressure drop below 1500 PSI in System A.
+              </p>
+
+              <div className="alert-actions">
+                <button>VIEW TELEMETRY</button>
+                <button>ASSIGN CREW</button>
+              </div>
+            </div>
+          </div>
+
+          {/* Alert Card 2 */}
+          <div className="alert-card warning-border">
+            <div className="alert-icon">
+              <span className="material-symbols-outlined">
+                notification_important
+              </span>
+            </div>
+
+            <div className="alert-content">
+              <div className="alert-top">
+                <div>
+                  <span className="alert-id">INS-402-ENG</span>
+                  <span className="badge warning-badge">
+                    OVERDUE
+                  </span>
+                </div>
+
+                <small>YESTERDAY · 4:00 PM</small>
+              </div>
+
+              <h4>
+                N402XP: Engine #2 Hot Section Inspection
+              </h4>
+
+              <p>
+                Inspection exceeded by 12 flight hours.
+                Immediate scheduling required.
+              </p>
+
+              <div className="alert-actions">
+                <button>SCHEDULE NOW</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Fleet Status */}
+        <section className="fleet-status">
+          <h3>Fleet Availability</h3>
+
+          <div className="status-number">
+            <h1>92%</h1>
+            <span>+1.2%</span>
+          </div>
+
+          <div className="progress-bar">
+            <div className="progress"></div>
+          </div>
+
+          <p>48 Airworthy / 4 Grounded / 2 Heavy Maint</p>
+        </section>
+      </main>
+    </div>
+  );
+};
+
+export default AlertsNotifications;

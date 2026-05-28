@@ -1,0 +1,321 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, sans-serif;
+  background: #f7f9fb;
+}
+
+/* LAYOUT */
+
+.schedule-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* TOPBAR */
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 260px;
+  right: 0;
+  height: 70px;
+  background: white;
+  border-bottom: 1px solid #d7d7d7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+  color: #002046;
+}
+
+.top-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.top-actions button {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 260px;
+  background: white;
+  border-right: 1px solid #d7d7d7;
+  padding: 30px 20px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+}
+
+.sidebar h2 {
+  color: #002046;
+  margin-bottom: 30px;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 8px;
+  color: #444;
+  font-weight: 600;
+}
+
+.sidebar a:hover {
+  background: #eef2f6;
+}
+
+.sidebar .active {
+  background: #002046;
+  color: white;
+}
+
+/* MAIN CONTENT */
+
+.main-content {
+  margin-left: 260px;
+  margin-top: 70px;
+  width: calc(100% - 260px);
+}
+
+/* HEADER */
+
+.page-header {
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subtitle {
+  color: #777;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.page-header h1 {
+  font-size: 38px;
+  color: #002046;
+}
+
+.new-slot-btn {
+  background: #002046;
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* LEGEND */
+
+.legend-bar {
+  display: flex;
+  gap: 30px;
+  padding: 20px 30px;
+  background: white;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.legend {
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+}
+
+.red {
+  background: #a73a00;
+}
+
+.blue {
+  background: #1b365d;
+}
+
+.green {
+  background: #0f766e;
+}
+
+/* GANTT */
+
+.gantt-wrapper {
+  overflow-x: auto;
+  padding-bottom: 40px;
+}
+
+.timeline-header {
+  display: flex;
+  position: sticky;
+  top: 0;
+  background: #eef2f6;
+  z-index: 10;
+}
+
+.aircraft-col {
+  width: 260px;
+  min-width: 260px;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+  font-weight: 700;
+}
+
+.timeline-days {
+  display: flex;
+}
+
+.day-cell {
+  width: 40px;
+  min-width: 40px;
+  text-align: center;
+  padding: 15px 0;
+  border-right: 1px solid #ddd;
+}
+
+.today {
+  color: #a73a00;
+  font-weight: 800;
+}
+
+/* ROW */
+
+.gantt-row {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+}
+
+.aircraft-info {
+  width: 260px;
+  min-width: 260px;
+  background: white;
+  border-right: 1px solid #ddd;
+  padding: 20px;
+}
+
+.aircraft-info h3 {
+  color: #002046;
+  margin-bottom: 5px;
+}
+
+.aircraft-info p {
+  font-size: 12px;
+  color: #777;
+}
+
+.gantt-grid {
+  position: relative;
+  flex: 1;
+  min-width: 1200px;
+  height: 80px;
+  background-image: linear-gradient(
+    to right,
+    #e2e8f0 1px,
+    transparent 1px
+  );
+  background-size: 40px 100%;
+}
+
+/* TASK BAR */
+
+.task-bar {
+  position: absolute;
+  top: 20px;
+  height: 42px;
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: white;
+  cursor: grab;
+  overflow: hidden;
+}
+
+.task-title {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.task-sub {
+  font-size: 9px;
+}
+
+.task-blue {
+  background: #1b365d;
+}
+
+.task-red {
+  background: #a73a00;
+}
+
+.task-green {
+  background: #0f766e;
+}
+
+.task-gray {
+  background: #cbd5e1;
+  color: #333;
+}
+
+.dragging {
+  opacity: 0.5;
+}
+
+/* FOOTER */
+
+.footer {
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #ddd;
+  background: white;
+}
+
+.footer button {
+  border: none;
+  background: transparent;
+  color: #002046;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* FAB */
+
+.fab {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background: #a73a00;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
