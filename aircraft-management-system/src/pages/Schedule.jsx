@@ -1,5 +1,8 @@
+// src/pages/Schedule.jsx
+
 import React, { useEffect } from "react";
-import "../styles/Schedule.css";
+import { NavLink } from "react-router-dom";
+import "../style/Schedule.css";
 
 const Schedule = () => {
   useEffect(() => {
@@ -32,6 +35,25 @@ const Schedule = () => {
       });
     });
   }, []);
+
+  // Explicit route mapper ensuring seamless alignment with App.jsx endpoints
+  const getRoutePath = (item) => {
+    switch (item) {
+      case "Dashboard":   return "/dashboard";
+      case "Aircraft":    return "/aircraft";
+      case "Tasks":       return "/tasks";
+      case "Schedule":    return "/schedule";
+      case "Technicians": return "/technicians";
+      case "Inventory":   return "/inventory";
+      case "History":     return "/history";
+      case "Reports":     return "/reports";
+      case "Alerts":      return "/alerts";
+      case "Upload":      return "/upload";
+      case "Admin":       return "/admin";
+      case "Profile":     return "/profile";
+      default:            return `/${item.toLowerCase()}`;
+    }
+  };
 
   const timeline = Array.from({ length: 30 }, (_, i) => i + 1);
 
@@ -105,17 +127,21 @@ const Schedule = () => {
 
       {/* SIDEBAR */}
       <aside className="sidebar">
-        <h2>Fleet Command</h2>
+        <div className="sidebar-header">
+          <h1>Fleet Command</h1>
+          <p>V 4.2.1-Industrial</p>
+        </div>
 
-        <nav>
-          <a href="/">Dashboard</a>
-          <a href="/">Aircraft</a>
-          <a href="/">Tasks</a>
-          <a href="/" className="active">
-            Schedule
-          </a>
-          <a href="/">Technicians</a>
-          <a href="/">Inventory</a>
+        <nav className="sidebar-nav">
+          {["Dashboard", "Aircraft", "Tasks", "Schedule", "Technicians", "Inventory"].map((item) => (
+            <NavLink
+              key={item}
+              to={getRoutePath(item)}
+              className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
+            >
+              {item}
+            </NavLink>
+          ))}
         </nav>
       </aside>
 

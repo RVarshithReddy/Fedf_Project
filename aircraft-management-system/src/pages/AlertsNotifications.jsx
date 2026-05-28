@@ -1,7 +1,23 @@
+// src/pages/AlertsNotifications.jsx
+
 import React from "react";
-import "../styles/AlertsNotifications.css";
+import { NavLink } from "react-router-dom";
+import "../style/AlertsNotifications.css";
 
 const AlertsNotifications = () => {
+  // Explicit route mapper ensuring seamless alignment with App.jsx endpoints
+  const getRoutePath = (item) => {
+    switch (item) {
+      case "Dashboard": return "/dashboard";
+      case "Aircraft":  return "/aircraft";
+      case "Tasks":     return "/tasks";
+      case "Alerts":    return "/alerts";
+      case "Inventory": return "/inventory";
+      case "Reports":   return "/reports";
+      default:          return `/${item.toLowerCase()}`;
+    }
+  };
+
   return (
     <div className="alerts-page">
       {/* Sidebar */}
@@ -12,35 +28,30 @@ const AlertsNotifications = () => {
         </div>
 
         <nav className="nav-links">
-          <a href="#">
-            <span className="material-symbols-outlined">dashboard</span>
-            Dashboard
-          </a>
-
-          <a href="#">
-            <span className="material-symbols-outlined">flight</span>
-            Aircraft
-          </a>
-
-          <a href="#">
-            <span className="material-symbols-outlined">assignment</span>
-            Tasks
-          </a>
-
-          <a href="#" className="active">
-            <span className="material-symbols-outlined">warning</span>
-            Alerts
-          </a>
-
-          <a href="#">
-            <span className="material-symbols-outlined">inventory_2</span>
-            Inventory
-          </a>
-
-          <a href="#">
-            <span className="material-symbols-outlined">analytics</span>
-            Reports
-          </a>
+          {[
+            "Dashboard",
+            "Aircraft",
+            "Tasks",
+            "Alerts",
+            "Inventory",
+            "Reports"
+          ].map((item, index) => (
+            <NavLink
+              to={getRoutePath(item)}
+              key={index}
+              className={({ isActive }) => isActive ? "active" : ""}
+            >
+              <span className="material-symbols-outlined">
+                {item === "Dashboard" && "dashboard"}
+                {item === "Aircraft" && "flight"}
+                {item === "Tasks" && "assignment"}
+                {item === "Alerts" && "warning"}
+                {item === "Inventory" && "inventory_2"}
+                {item === "Reports" && "analytics"}
+              </span>
+              {item}
+            </NavLink>
+          ))}
         </nav>
 
         <div className="profile-card">

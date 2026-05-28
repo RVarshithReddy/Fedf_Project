@@ -1,9 +1,27 @@
 // src/pages/AdminPanel.jsx
 
 import React from "react";
-import "../styles/AdminPanel.css";
+import { NavLink } from "react-router-dom";
+import "../style/AdminPanel.css";
 
 const AdminPanel = () => {
+  // Explicit route mapper ensuring seamless alignment with App.jsx endpoints
+  const getRoutePath = (item) => {
+    switch (item) {
+      case "Dashboard":   return "/dashboard";
+      case "Aircraft":    return "/aircraft";
+      case "Technicians": return "/technicians";
+      case "Inventory":   return "/inventory";
+      case "History":     return "/history";
+      case "Reports":     return "/reports";
+      case "Alerts":      return "/alerts";
+      case "Upload":      return "/upload";
+      case "Admin":       return "/admin";
+      case "Profile":     return "/profile";
+      default:            return `/${item.toLowerCase()}`;
+    }
+  };
+
   return (
     <div className="admin-wrapper">
 
@@ -31,7 +49,6 @@ const AdminPanel = () => {
         </div>
 
         <nav className="sidebar-nav">
-
           {[
             "Dashboard",
             "Aircraft",
@@ -46,10 +63,10 @@ const AdminPanel = () => {
             "Admin",
             "Profile",
           ].map((item, index) => (
-            <a
-              href="/#"
+            <NavLink
+              to={getRoutePath(item)}
               key={index}
-              className={item === "Admin" ? "nav-item active" : "nav-item"}
+              className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}
             >
               <span className="material-symbols-outlined">
                 {item === "Dashboard" && "dashboard"}
@@ -67,7 +84,7 @@ const AdminPanel = () => {
               </span>
 
               <span>{item}</span>
-            </a>
+            </NavLink>
           ))}
         </nav>
       </aside>

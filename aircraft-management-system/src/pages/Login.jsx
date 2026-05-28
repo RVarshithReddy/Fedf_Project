@@ -1,8 +1,27 @@
+// src/pages/Login.jsx
+
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../style/Login.css";
 
 function Login() {
   const [showMFA, setShowMFA] = useState(false);
+  const navigate = useNavigate();
+
+  const handleVerifyComplete = (e) => {
+    e.preventDefault();
+    // Programmatically push the user onto the core ecosystem dashboard
+    navigate("/dashboard");
+  };
+
+  // Explicit route mapper ensuring seamless alignment with App.jsx endpoints
+  const getRoutePath = (item) => {
+    switch (item) {
+      case "Support":   return "/support";
+      case "Emergency": return "/emergency";
+      default:          return "/login";
+    }
+  };
 
   return (
     <div className="login-page">
@@ -91,7 +110,10 @@ function Login() {
                   <input maxLength="1" />
                 </div>
 
-                <button className="secondary-btn">
+                <button 
+                  className="secondary-btn"
+                  onClick={handleVerifyComplete}
+                >
                   Complete Verification
                 </button>
 
@@ -105,10 +127,20 @@ function Login() {
             )}
 
             <div className="help-links">
-              <a href="/">Access Support</a>
-              <a href="/" className="emergency">
+              <span 
+                className="link-style"
+                onClick={() => navigate(getRoutePath("Support"))}
+                style={{ cursor: "pointer" }}
+              >
+                Access Support
+              </span>
+              <span 
+                className="emergency link-style"
+                onClick={() => navigate(getRoutePath("Emergency"))}
+                style={{ cursor: "pointer" }}
+              >
                 EMERGENCY LINE
-              </a>
+              </span>
             </div>
           </div>
         </div>

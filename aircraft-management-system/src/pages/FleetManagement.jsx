@@ -1,5 +1,8 @@
+// src/pages/FleetManagement.jsx
+
 import { useState } from "react";
-import "./FleetManagement.css";
+import { NavLink } from "react-router-dom";
+import "../style/FleetManagement.css";
 
 function FleetManagement() {
   const [showPanel, setShowPanel] = useState(false);
@@ -14,6 +17,23 @@ function FleetManagement() {
     setShowPanel(false);
   };
 
+  // Explicit route mapper ensuring seamless alignment with App.jsx endpoints
+  const getRoutePath = (item) => {
+    switch (item) {
+      case "Dashboard":   return "/dashboard";
+      case "Aircraft":    return "/aircraft";
+      case "Tasks":       return "/tasks";
+      case "Schedule":    return "/schedule";
+      case "Technicians": return "/technicians";
+      case "Inventory":   return "/inventory";
+      case "History":     return "/history";
+      case "Reports":     return "/reports";
+      case "Alerts":      return "/alerts";
+      case "Admin":       return "/admin";
+      default:            return `/${item.toLowerCase()}`;
+    }
+  };
+
   return (
     <div className="fleet-page">
 
@@ -26,16 +46,26 @@ function FleetManagement() {
         </div>
 
         <nav>
-          <a>Dashboard</a>
-          <a className="active">Aircraft</a>
-          <a>Tasks</a>
-          <a>Schedule</a>
-          <a>Technicians</a>
-          <a>Inventory</a>
-          <a>History</a>
-          <a>Reports</a>
-          <a>Alerts</a>
-          <a>Admin</a>
+          {[
+            "Dashboard",
+            "Aircraft",
+            "Tasks",
+            "Schedule",
+            "Technicians",
+            "Inventory",
+            "History",
+            "Reports",
+            "Alerts",
+            "Admin",
+          ].map((item, index) => (
+            <NavLink
+              to={getRoutePath(item)}
+              key={index}
+              className={({ isActive }) => isActive ? "active" : ""}
+            >
+              {item}
+            </NavLink>
+          ))}
         </nav>
 
         <div className="profile-box">
@@ -143,7 +173,7 @@ function FleetManagement() {
                   <td>JFK-LHR</td>
                   <td>Oct 24, 2023</td>
                   <td>
-                    <button className="link-btn">
+                    <button className="link-btn" onClick={(e) => e.stopPropagation()}>
                       VIEW LOGS
                     </button>
                   </td>
@@ -160,7 +190,7 @@ function FleetManagement() {
                   <td>ORD-LAX</td>
                   <td>OVERDUE</td>
                   <td>
-                    <button className="link-btn red-text">
+                    <button className="link-btn red-text" onClick={(e) => e.stopPropagation()}>
                       URGENT ACTION
                     </button>
                   </td>
@@ -177,16 +207,14 @@ function FleetManagement() {
                   <td>SFO-HND</td>
                   <td>Oct 18, 2023</td>
                   <td>
-                    <button className="link-btn">
+                    <button className="link-btn" onClick={(e) => e.stopPropagation()}>
                       VIEW LOGS
                     </button>
                   </td>
                 </tr>
 
               </tbody>
-
             </table>
-
           </section>
         </div>
       </main>

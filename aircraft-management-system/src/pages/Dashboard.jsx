@@ -1,6 +1,26 @@
-import "./Dashboard.css";
+// src/pages/Dashboard.jsx
+
+import React from "react";
+import { NavLink } from "react-router-dom";
+import "../style/Dashboard.css";
 
 function Dashboard() {
+  // Explicit route mapper ensuring seamless alignment with App.jsx endpoints
+  const getRoutePath = (item) => {
+    switch (item) {
+      case "Dashboard":   return "/dashboard";
+      case "Aircraft":    return "/aircraft";
+      case "Tasks":       return "/tasks";
+      case "Schedule":    return "/schedule";
+      case "Technicians": return "/technicians";
+      case "Inventory":   return "/inventory";
+      case "Reports":     return "/reports";
+      case "Alerts":      return "/alerts";
+      case "Profile":     return "/profile";
+      default:            return `/${item.toLowerCase()}`;
+    }
+  };
+
   return (
     <div className="dashboard-page">
 
@@ -38,15 +58,25 @@ function Dashboard() {
         </div>
 
         <nav>
-          <a className="active">Dashboard</a>
-          <a>Aircraft</a>
-          <a>Tasks</a>
-          <a>Schedule</a>
-          <a>Technicians</a>
-          <a>Inventory</a>
-          <a>Reports</a>
-          <a>Alerts</a>
-          <a>Profile</a>
+          {[
+            "Dashboard",
+            "Aircraft",
+            "Tasks",
+            "Schedule",
+            "Technicians",
+            "Inventory",
+            "Reports",
+            "Alerts",
+            "Profile",
+          ].map((item, index) => (
+            <NavLink
+              to={getRoutePath(item)}
+              key={index}
+              className={({ isActive }) => isActive ? "active" : ""}
+            >
+              {item}
+            </NavLink>
+          ))}
         </nav>
       </aside>
 

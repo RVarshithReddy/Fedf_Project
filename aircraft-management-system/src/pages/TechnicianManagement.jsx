@@ -1,28 +1,64 @@
+// src/pages/TechnicianManagement.jsx
+
 import React from "react";
-import "../styles/TechnicianManagement.css";
+import { NavLink } from "react-router-dom";
+import "../style/TechnicianManagement.css";
 
 const TechnicianManagement = () => {
+  // Configured sidebar items matching core dashboard directory entries
+  const navItems = [
+    { name: "Dashboard" },
+    { name: "Aircraft" },
+    { name: "Tasks" },
+    { name: "Schedule" },
+    { name: "Technicians" },
+    { name: "Inventory" },
+    { name: "History" },
+    { name: "Reports" },
+    { name: "Alerts" },
+    { name: "Upload" },
+    { name: "Admin" },
+    { name: "Profile" }
+  ];
+
+  // Explicit route mapper ensuring seamless alignment with App.jsx endpoints
+  const getRoutePath = (item) => {
+    switch (item) {
+      case "Dashboard":   return "/dashboard";
+      case "Aircraft":    return "/aircraft";
+      case "Tasks":       return "/tasks";
+      case "Schedule":    return "/schedule";
+      case "Technicians": return "/technicians";
+      case "Inventory":   return "/inventory";
+      case "History":     return "/history";
+      case "Reports":     return "/reports";
+      case "Alerts":      return "/alerts";
+      case "Upload":      return "/upload";
+      case "Admin":       return "/admin";
+      case "Profile":     return "/profile";
+      default:            return `/${item.toLowerCase()}`;
+    }
+  };
+
   return (
     <div className="tech-page">
       {/* Sidebar */}
       <aside className="sidebar">
         <div className="logo-section">
-          <h2>Fleet Command</h2>
+          <h1>Fleet Command</h1>
           <p>V 4.2.1-Industrial</p>
         </div>
 
         <nav className="nav-links">
-          <a href="#">Dashboard</a>
-          <a href="#">Aircraft</a>
-          <a href="#">Tasks</a>
-          <a href="#">Schedule</a>
-          <a href="#" className="active">
-            Technicians
-          </a>
-          <a href="#">Inventory</a>
-          <a href="#">History</a>
-          <a href="#">Reports</a>
-          <a href="#">Alerts</a>
+          {navItems.map((item) => (
+            <NavLink 
+              key={item.name}
+              to={getRoutePath(item.name)} 
+              className={({ isActive }) => isActive ? "active" : ""}
+            >
+              {item.name}
+            </NavLink>
+          ))}
         </nav>
       </aside>
 

@@ -1,7 +1,44 @@
+// src/pages/Profile.jsx
+
 import React from "react";
-import "../styles/Profile.css";
+import { Link, NavLink } from "react-router-dom";
+import "../style/Profile.css";
 
 const Profile = () => {
+  // Config array pairing UI names for robust structural mapping
+  const navItems = [
+    { name: "Dashboard" },
+    { name: "Aircraft" },
+    { name: "Tasks" },
+    { name: "Schedule" },
+    { name: "Technicians" },
+    { name: "Inventory" },
+    { name: "History" },
+    { name: "Reports" },
+    { name: "Alerts" },
+    { name: "Upload" },
+    { name: "Admin" },
+  ];
+
+  // Explicit route mapper ensuring seamless alignment with App.jsx endpoints
+  const getRoutePath = (item) => {
+    switch (item) {
+      case "Dashboard":   return "/dashboard";
+      case "Aircraft":    return "/aircraft";
+      case "Tasks":       return "/tasks";
+      case "Schedule":    return "/schedule";
+      case "Technicians": return "/technicians";
+      case "Inventory":   return "/inventory";
+      case "History":     return "/history";
+      case "Reports":     return "/reports";
+      case "Alerts":      return "/alerts";
+      case "Upload":      return "/upload";
+      case "Admin":       return "/admin";
+      case "Profile":     return "/profile";
+      default:            return `/${item.toLowerCase()}`;
+    }
+  };
+
   return (
     <div className="profile-layout">
       {/* Sidebar */}
@@ -12,27 +49,23 @@ const Profile = () => {
         </div>
 
         <nav className="sidebar-nav">
-          {[
-            "Dashboard",
-            "Aircraft",
-            "Tasks",
-            "Schedule",
-            "Technicians",
-            "Inventory",
-            "History",
-            "Reports",
-            "Alerts",
-            "Upload",
-            "Admin",
-          ].map((item) => (
-            <a href="/" key={item} className="nav-item">
-              {item}
-            </a>
+          {navItems.map((item) => (
+            <NavLink
+              to={getRoutePath(item.name)}
+              key={item.name}
+              className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
+            >
+              {item.name}
+            </NavLink>
           ))}
 
-          <a href="/" className="nav-item active">
+          {/* Profile link managed cleanly via NavLink state styling */}
+          <NavLink
+            to={getRoutePath("Profile")}
+            className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
+          >
             Profile
-          </a>
+          </NavLink>
         </nav>
 
         <div className="sidebar-user">

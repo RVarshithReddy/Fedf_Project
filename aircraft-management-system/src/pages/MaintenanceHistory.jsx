@@ -1,7 +1,28 @@
+// src/pages/MaintenanceHistory.jsx
+
 import React from "react";
-import "../styles/MaintenanceHistory.css";
+import { NavLink } from "react-router-dom";
+import "../style/MaintenanceHistory.css";
 
 const MaintenanceHistory = () => {
+  // Explicit route mapper ensuring seamless alignment with App.jsx endpoints
+  const getRoutePath = (item) => {
+    switch (item) {
+      case "Dashboard":   return "/dashboard";
+      case "Aircraft":    return "/aircraft";
+      case "Tasks":       return "/tasks";
+      case "Schedule":    return "/schedule";
+      case "Technicians": return "/technicians";
+      case "Inventory":   return "/inventory";
+      case "History":     return "/history";
+      case "Reports":     return "/reports";
+      case "Alerts":      return "/alerts";
+      case "Admin":       return "/admin";
+      case "Profile":     return "/profile";
+      default:            return `/${item.toLowerCase()}`;
+    }
+  };
+
   return (
     <div className="history-page">
       {/* Sidebar */}
@@ -12,22 +33,40 @@ const MaintenanceHistory = () => {
         </div>
 
         <nav className="sidebar-nav">
-          <a href="#">Dashboard</a>
-          <a href="#">Aircraft</a>
-          <a href="#">Tasks</a>
-          <a href="#">Schedule</a>
-          <a href="#">Technicians</a>
-          <a href="#">Inventory</a>
-          <a href="#" className="active">
-            History
-          </a>
-          <a href="#">Reports</a>
-          <a href="#">Alerts</a>
+          {[
+            "Dashboard",
+            "Aircraft",
+            "Tasks",
+            "Schedule",
+            "Technicians",
+            "Inventory",
+            "History",
+            "Reports",
+            "Alerts",
+          ].map((item, index) => (
+            <NavLink
+              key={index}
+              to={getRoutePath(item)}
+              className={({ isActive }) => isActive ? "active" : ""}
+            >
+              {item}
+            </NavLink>
+          ))}
         </nav>
 
         <div className="sidebar-footer">
-          <a href="#">Admin</a>
-          <a href="#">Profile</a>
+          <NavLink 
+            to={getRoutePath("Admin")} 
+            className={({ isActive }) => isActive ? "active" : ""}
+          >
+            Admin
+          </NavLink>
+          <NavLink 
+            to={getRoutePath("Profile")} 
+            className={({ isActive }) => isActive ? "active" : ""}
+          >
+            Profile
+          </NavLink>
         </div>
       </aside>
 
@@ -213,6 +252,7 @@ const MaintenanceHistory = () => {
 
         {/* Compliance Card */}
         <section className="compliance-card">
+          {/* Content */}
           <h3>Compliance Check</h3>
 
           <p>

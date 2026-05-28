@@ -1,7 +1,25 @@
+// src/pages/InventoryManagement.jsx
+
 import React from "react";
-import "../styles/InventoryManagement.css";
+import { NavLink } from "react-router-dom";
+import "../style/InventoryManagement.css";
 
 const InventoryManagement = () => {
+  // Explicit route mapper ensuring seamless alignment with App.jsx endpoints
+  const getRoutePath = (item) => {
+    switch (item) {
+      case "Dashboard":   return "/dashboard";
+      case "Aircraft":    return "/aircraft";
+      case "Tasks":       return "/tasks";
+      case "Inventory":   return "/inventory";
+      case "Technicians": return "/technicians";
+      case "Schedule":    return "/schedule";
+      case "Reports":     return "/reports";
+      case "Alerts":      return "/alerts";
+      default:            return `/${item.toLowerCase()}`;
+    }
+  };
+
   return (
     <div className="inventory-page">
 
@@ -69,13 +87,13 @@ const InventoryManagement = () => {
             "Reports",
             "Alerts",
           ].map((item, index) => (
-            <a
+            <NavLink
               key={index}
-              href="/#"
-              className={item === "Inventory" ? "active" : ""}
+              to={getRoutePath(item)}
+              className={({ isActive }) => isActive ? "active" : ""}
             >
               {item}
-            </a>
+            </NavLink>
           ))}
         </nav>
       </aside>
@@ -136,15 +154,15 @@ const InventoryManagement = () => {
         {/* FILTER BAR */}
         <div className="filter-bar">
 
-          <select>
+          <select defaultValue="All Categories">
             <option>All Categories</option>
           </select>
 
-          <select>
+          <select defaultValue="All Bin Locations">
             <option>All Bin Locations</option>
           </select>
 
-          <select>
+          <select defaultValue="Status: All">
             <option>Status: All</option>
           </select>
 

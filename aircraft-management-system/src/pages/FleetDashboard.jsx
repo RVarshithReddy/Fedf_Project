@@ -1,5 +1,8 @@
+// src/pages/FleetDashboard.jsx
+
 import { useState } from "react";
-import "./FleetDashboard.css";
+import { NavLink } from "react-router-dom";
+import "../style/FleetDashboard.css";
 
 function FleetDashboard() {
   const [showPanel, setShowPanel] = useState(false);
@@ -14,6 +17,23 @@ function FleetDashboard() {
     setShowPanel(false);
   };
 
+  // Explicit route mapper ensuring seamless alignment with App.jsx endpoints
+  const getRoutePath = (item) => {
+    switch (item) {
+      case "Dashboard":   return "/dashboard";
+      case "Aircraft":    return "/aircraft";
+      case "Tasks":       return "/tasks";
+      case "Schedule":    return "/schedule";
+      case "Technicians": return "/technicians";
+      case "Inventory":   return "/inventory";
+      case "History":     return "/history";
+      case "Reports":     return "/reports";
+      case "Alerts":      return "/alerts";
+      case "Admin":       return "/admin";
+      default:            return `/${item.toLowerCase()}`;
+    }
+  };
+
   return (
     <div className="dashboard">
 
@@ -26,21 +46,41 @@ function FleetDashboard() {
         </div>
 
         <nav className="nav-links">
-          <a href="/">Dashboard</a>
-          <a href="/" className="active">Aircraft</a>
-          <a href="/">Tasks</a>
-          <a href="/">Schedule</a>
-          <a href="/">Technicians</a>
-          <a href="/">Inventory</a>
-          <a href="/">History</a>
+          {[
+            "Dashboard",
+            "Aircraft",
+            "Tasks",
+            "Schedule",
+            "Technicians",
+            "Inventory",
+            "History"
+          ].map((item, index) => (
+            <NavLink
+              to={getRoutePath(item)}
+              key={index}
+              className={({ isActive }) => isActive ? "active" : ""}
+            >
+              {item}
+            </NavLink>
+          ))}
 
           <div className="system-label">
             <p>System</p>
           </div>
 
-          <a href="/">Reports</a>
-          <a href="/">Alerts</a>
-          <a href="/">Admin</a>
+          {[
+            "Reports",
+            "Alerts",
+            "Admin"
+          ].map((item, index) => (
+            <NavLink
+              to={getRoutePath(item)}
+              key={index}
+              className={({ isActive }) => isActive ? "active" : ""}
+            >
+              {item}
+            </NavLink>
+          ))}
         </nav>
 
         <div className="profile-card">
@@ -163,7 +203,7 @@ function FleetDashboard() {
                   <td>Oct 24, 2023</td>
 
                   <td>
-                    <button className="table-btn">
+                    <button className="table-btn" onClick={(e) => e.stopPropagation()}>
                       VIEW LOGS
                     </button>
                   </td>
@@ -183,7 +223,7 @@ function FleetDashboard() {
                   <td>OVERDUE</td>
 
                   <td>
-                    <button className="table-btn red-text">
+                    <button className="table-btn red-text" onClick={(e) => e.stopPropagation()}>
                       URGENT ACTION
                     </button>
                   </td>
@@ -203,7 +243,7 @@ function FleetDashboard() {
                   <td>Oct 18, 2023</td>
 
                   <td>
-                    <button className="table-btn">
+                    <button className="table-btn" onClick={(e) => e.stopPropagation()}>
                       VIEW LOGS
                     </button>
                   </td>

@@ -1,208 +1,587 @@
-import React from "react";
-import "../style/AlertsNotifications.css";
+/* ==========================================================================
+   AeroOps Industrial Design Variables & Tokens
+   ========================================================================== */
+:root {
+  /* System Brand Colors */
+  --color-primary: #002046;
+  --color-primary-container: #1b365d;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #87a0cd;
 
-const AlertsNotifications = () => {
-  return (
-    <div className="alerts-page">
-      {/* Sidebar */}
-      <aside className="sidebar">
-        <div className="logo-section">
-          <h1>Fleet Command</h1>
-          <p>V 4.2.1-Industrial</p>
-        </div>
+  /* Priority Alerts & Warning Tokens */
+  --color-secondary: #a73a00;
+  --color-secondary-container: #fd661d;
+  --color-secondary-fixed: #ffdbce;
+  --color-on-secondary-fixed: #370e00;
 
-        <nav className="nav-links">
-          <a href="#">
-            <span className="material-symbols-outlined">dashboard</span>
-            Dashboard
-          </a>
+  /* Safe Technical Systems (Teal) */
+  --color-tertiary-container: #003d37;
+  --color-on-tertiary-container: #3cafa2;
+  --color-tertiary-fixed-dim: #6bd8cb;
 
-          <a href="#">
-            <span className="material-symbols-outlined">flight</span>
-            Aircraft
-          </a>
+  /* Failure & Critical Error Tokens */
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error: #ffffff;
 
-          <a href="#">
-            <span className="material-symbols-outlined">assignment</span>
-            Tasks
-          </a>
+  /* Surface System Archetypes */
+  --color-background: #f7f9fb;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f2f4f6;
+  --color-surface-container: #eceef0;
+  --color-surface-container-high: #e6e8ea;
+  --color-on-surface: #191c1e;
+  --color-on-surface-variant: #44474e;
+  --color-outline-variant: #c4c6cf;
+  --color-outline: #74777f;
 
-          <a href="#" className="active">
-            <span className="material-symbols-outlined">warning</span>
-            Alerts
-          </a>
+  /* Border Radii Layouts */
+  --radius-lg: 4px;
+  --radius-xl: 8px;
+  --radius-full: 12px;
+}
 
-          <a href="#">
-            <span className="material-symbols-outlined">inventory_2</span>
-            Inventory
-          </a>
+/* ==========================================================================
+   Global Base Typography & Layout Normalization
+   ========================================================================== */
+.alerts-page {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
 
-          <a href="#">
-            <span className="material-symbols-outlined">analytics</span>
-            Reports
-          </a>
-        </nav>
+.alerts-page h1, 
+.alerts-page h2, 
+.alerts-page h3, 
+.alerts-page h4 {
+  margin: 0;
+  color: var(--color-primary);
+}
 
-        <div className="profile-card">
-          <img
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsGXIfyDoS8hGjj645Wf9L42VQD4BeZDjnQ4WC9hr8YP8epVe9cQcr5k4ylQc90b2591eSP0ObHHp0tJ3BsaBVDCJuBJi1xGUaWmUd0QFYOQd3hr0NxBnWaVSyyl1he1vzdzcWYc4IqxGPO9XJdGJleCgDmTqU8fjIQYxzXcQODOxev5yF5UV-lPEaRk9Nyn2j1yTd74XAghANFfAWrVdSSh9l14K9VBkWjmKmnk9tzqYREQV2VnYrgB9tViW4YbmehwCfG-IAnIA"
-            alt="profile"
-          />
+/* Material Symbols Standardization */
+.alerts-page .material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+  font-size: 20px;
+}
 
-          <div>
-            <h4>Marcus Vance</h4>
-            <p>Chief Engineer</p>
-          </div>
-        </div>
-      </aside>
+/* ==========================================================================
+   Navigation Sidebar Component
+   ========================================================================== */
+.alerts-page .sidebar {
+  width: 256px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: var(--color-surface-container);
+  border-r: 1px solid var(--color-outline-variant);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+  box-sizing: border-box;
+  z-index: 50;
+}
 
-      {/* Main Content */}
-      <main className="main-content">
-        {/* Header */}
-        <header className="topbar">
-          <div className="search-box">
-            <span className="material-symbols-outlined">search</span>
+.alerts-page .logo-section {
+  padding: 0 24px;
+  margin-bottom: 32px;
+}
 
-            <input
-              type="text"
-              placeholder="Search tail number, task, or alert ID..."
-            />
-          </div>
+.alerts-page .logo-section h1 {
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 28px;
+}
 
-          <div className="topbar-right">
-            <span className="material-symbols-outlined">notifications</span>
+.alerts-page .logo-section p {
+  margin: 4px 0 0 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-outline);
+}
 
-            <div className="brand">
-              <h2>AeroOps Control</h2>
-              <p>System Alert Center</p>
-            </div>
-          </div>
-        </header>
+.alerts-page .nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 12px;
+  flex-1: 1;
+}
 
-        {/* Alert Overview */}
-        <section className="overview-grid">
-          <div className="overview-card critical">
-            <p>CURRENT AIRCRAFT ON GROUND</p>
-            <h2>04</h2>
-            <span className="material-symbols-outlined big-icon">
-              flight_takeoff
-            </span>
-          </div>
+.alerts-page .nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-on-surface-variant);
+  border-radius: var(--radius-lg);
+  transition: all 0.2s ease;
+}
 
-          <div className="overview-card overdue">
-            <p>OVERDUE INSPECTIONS</p>
-            <h2>12</h2>
-            <span className="material-symbols-outlined big-icon">
-              history
-            </span>
-          </div>
+.alerts-page .nav-links a:hover {
+  background-color: var(--color-surface-container-high);
+}
 
-          <div className="overview-card">
-            <p>NEW SAFETY BULLETINS</p>
-            <h2>07</h2>
-            <span className="material-symbols-outlined big-icon">
-              gavel
-            </span>
-          </div>
-        </section>
+/* Router NavLink Active Class */
+.alerts-page .nav-links a.active {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 700;
+  transform: scale(0.98);
+}
 
-        {/* Alert Feed */}
-        <section className="alert-feed">
-          <div className="feed-header">
-            <h3>Active Alert Feed</h3>
+.alerts-page .nav-links a.active .material-symbols-outlined {
+  font-variation-settings: 'FILL' 1;
+}
 
-            <div className="feed-buttons">
-              <button>ALL ALERTS</button>
-              <button className="active-btn">UNREAD (21)</button>
-            </div>
-          </div>
+.alerts-page .profile-card {
+  margin-top: auto;
+  padding: 16px;
+  margin-horizontal: 16px;
+  border-top: 1px solid rgba(196, 198, 207, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-          {/* Alert Card */}
-          <div className="alert-card critical-border">
-            <div className="alert-icon">
-              <span className="material-symbols-outlined">error</span>
-            </div>
+.alerts-page .profile-card img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-primary-container);
+}
 
-            <div className="alert-content">
-              <div className="alert-top">
-                <div>
-                  <span className="alert-id">AOG-772-HYD</span>
-                  <span className="badge critical-badge">CRITICAL</span>
-                </div>
+.alerts-page .profile-card h4 {
+  font-size: 14px;
+  font-weight: 700;
+}
 
-                <small>08:42 AM · 12 OCT 23</small>
-              </div>
+.alerts-page .profile-card p {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-outline);
+}
 
-              <h4>
-                N772AF: Main Hydraulic System Pressure Failure
-              </h4>
+/* ==========================================================================
+   Main Layout Framework Canvas
+   ========================================================================== */
+.alerts-page .main-content {
+  margin-left: 256px;
+  flex-grow: 1;
+  padding: 32px;
+  box-sizing: border-box;
+}
 
-              <p>
-                Aircraft grounded at KDFW. Telemetry indicates
-                pressure drop below 1500 PSI in System A.
-              </p>
+/* Top Navigation Bar */
+.alerts-page .topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  background-color: var(--color-surface-container-lowest);
+  border-bottom: 1px solid var(--color-outline-variant);
+  margin: -32px -32px 32px -32px;
+  padding: 0 32px;
+  z-index: 40;
+}
 
-              <div className="alert-actions">
-                <button>VIEW TELEMETRY</button>
-                <button>ASSIGN CREW</button>
-              </div>
-            </div>
-          </div>
+.alerts-page .search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
-          {/* Alert Card 2 */}
-          <div className="alert-card warning-border">
-            <div className="alert-icon">
-              <span className="material-symbols-outlined">
-                notification_important
-              </span>
-            </div>
+.alerts-page .search-box .material-symbols-outlined {
+  position: absolute;
+  left: 12px;
+  color: var(--color-outline);
+}
 
-            <div className="alert-content">
-              <div className="alert-top">
-                <div>
-                  <span className="alert-id">INS-402-ENG</span>
-                  <span className="badge warning-badge">
-                    OVERDUE
-                  </span>
-                </div>
+.alerts-page .search-box input {
+  width: 320px;
+  padding: 8px 16px 8px 40px;
+  background-color: var(--color-surface-container-low);
+  border: none;
+  border-radius: var(--radius-xl);
+  font-size: 13px;
+}
 
-                <small>YESTERDAY · 4:00 PM</small>
-              </div>
+.alerts-page .search-box input:focus {
+  outline: 2px solid var(--color-primary);
+}
 
-              <h4>
-                N402XP: Engine #2 Hot Section Inspection
-              </h4>
+.alerts-page .topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
 
-              <p>
-                Inspection exceeded by 12 flight hours.
-                Immediate scheduling required.
-              </p>
+.alerts-page .topbar-right > .material-symbols-outlined {
+  color: var(--color-outline);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
 
-              <div className="alert-actions">
-                <button>SCHEDULE NOW</button>
-              </div>
-            </div>
-          </div>
-        </section>
+.alerts-page .topbar-right > .material-symbols-outlined:hover {
+  background-color: var(--color-surface-container-low);
+}
 
-        {/* Fleet Status */}
-        <section className="fleet-status">
-          <h3>Fleet Availability</h3>
+.alerts-page .brand {
+  text-align: right;
+}
 
-          <div className="status-number">
-            <h1>92%</h1>
-            <span>+1.2%</span>
-          </div>
+.alerts-page .brand h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
 
-          <div className="progress-bar">
-            <div className="progress"></div>
-          </div>
+.alerts-page .brand p {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+}
 
-          <p>48 Airworthy / 4 Grounded / 2 Heavy Maint</p>
-        </section>
-      </main>
-    </div>
-  );
-};
+/* ==========================================================================
+   Overview Status Grid Metrics
+   ========================================================================== */
+.alerts-page .overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
 
-export default AlertsNotifications;
+.alerts-page .overview-card {
+  background-color: var(--color-surface-container-lowest);
+  border: 1px solid var(--color-outline-variant);
+  padding: 24px;
+  border-radius: var(--radius-xl);
+  position: relative;
+  height: 192px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.alerts-page .overview-card p {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-outline);
+}
+
+.alerts-page .overview-card h2 {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 44px;
+}
+
+.alerts-page .overview-card .big-icon {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  font-size: 48px;
+  opacity: 0.1;
+  color: var(--color-primary);
+}
+
+/* Dynamic Urgency Modifiers */
+.alerts-page .overview-card.critical {
+  background-color: var(--color-error);
+  color: var(--color-on-error);
+  border: none;
+  animation: pulse-red-alert 2s infinite;
+}
+
+.alerts-page .overview-card.critical p,
+.alerts-page .overview-card.critical h2,
+.alerts-page .overview-card.critical .big-icon {
+  color: var(--color-on-error);
+  opacity: 1;
+}
+
+.alerts-page .overview-card.critical .big-icon {
+  opacity: 0.2;
+}
+
+.alerts-page .overview-card.overdue {
+  background-color: var(--color-secondary-container);
+  border: 1px solid var(--color-secondary);
+}
+
+.alerts-page .overview-card.overdue p,
+.alerts-page .overview-card.overdue h2,
+.alerts-page .overview-card.overdue .big-icon {
+  color: var(--color-on-secondary-fixed);
+}
+
+.alerts-page .overview-card.overdue p {
+  opacity: 0.9;
+}
+
+.alerts-page .overview-card.overdue .big-icon {
+  opacity: 0.2;
+}
+
+@keyframes pulse-red-alert {
+  0% { box-shadow: 0 0 0 0 rgba(186, 26, 26, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(186, 26, 26, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(186, 26, 26, 0); }
+}
+
+/* ==========================================================================
+   Active Flight Alert Feed Queue
+   ========================================================================== */
+.alerts-page .alert-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.alerts-page .feed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alerts-page .feed-header h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.alerts-page .feed-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.alerts-page .feed-buttons button {
+  background-color: var(--color-surface-container-high);
+  border: none;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-on-surface-variant);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.alerts-page .feed-buttons button:hover {
+  background-color: var(--color-surface-variant);
+}
+
+.alerts-page .feed-buttons button.active-btn {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+/* Data Alert Container Cards */
+.alerts-page .alert-card {
+  background-color: var(--color-surface-container-lowest);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  border-left: 4px solid var(--color-outline-variant);
+  transition: box-shadow 0.2s ease;
+}
+
+.alerts-page .alert-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* High Priority Component Boundaries */
+.alerts-page .alert-card.critical-border {
+  border-left-color: var(--color-error);
+}
+
+.alerts-page .alert-card.warning-border {
+  border-left-color: var(--color-secondary);
+}
+
+.alerts-page .alert-icon .material-symbols-outlined {
+  font-variation-settings: 'FILL' 1;
+}
+
+.alerts-page .critical-border .alert-icon {
+  color: var(--color-error);
+}
+
+.alerts-page .warning-border .alert-icon {
+  color: var(--color-secondary);
+}
+
+.alerts-page .alert-content {
+  flex-grow: 1;
+}
+
+.alerts-page .alert-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.alerts-page .alert-id {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  margin-right: 12px;
+}
+
+.alerts-page .critical-border .alert-id { color: var(--color-error); font-weight: 700; }
+.alerts-page .warning-border .alert-id { color: var(--color-secondary); font-weight: 700; }
+
+/* Global System Status Badges */
+.alerts-page .badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-lg);
+}
+
+.alerts-page .critical-badge {
+  background-color: var(--color-error);
+  color: var(--color-on-error);
+}
+
+.alerts-page .warning-badge {
+  background-color: var(--color-secondary-fixed);
+  color: var(--color-on-secondary-fixed);
+}
+
+.alerts-page .alert-top small {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-outline);
+}
+
+.alerts-page .alert-content h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.alerts-page .alert-content p {
+  margin: 0 0 16px 0;
+  color: var(--color-on-surface-variant);
+}
+
+/* Functional Dashboard Action Buttons */
+.alerts-page .alert-actions {
+  display: flex;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-outline-variant);
+}
+
+.alerts-page .alert-actions button {
+  background: none;
+  border: none;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  cursor: pointer;
+  padding: 0;
+}
+
+.alerts-page .alert-actions button:hover {
+  text-decoration: underline;
+}
+
+.alerts-page .warning-border .alert-actions button {
+  color: var(--color-primary);
+}
+
+/* ==========================================================================
+   Fleet Capacity & Progress Component Section
+   ========================================================================== */
+.alerts-page .fleet-status {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  padding: 20px;
+  border-radius: var(--radius-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.alerts-page .fleet-status h3 {
+  color: var(--color-on-primary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-bottom: 16px;
+}
+
+.alerts-page .status-number {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.alerts-page .status-number h1 {
+  color: var(--color-on-primary);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 36px;
+}
+
+.alerts-page .status-number span {
+  color: var(--color-on-primary-container);
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.alerts-page .fleet-status .progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: var(--color-primary-container);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.alerts-page .fleet-status .progress {
+  width: 92%;
+  height: 100%;
+  background-color: var(--color-tertiary-fixed-dim);
+}
+
+.alerts-page .fleet-status p {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.7;
+}
